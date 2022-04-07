@@ -1,25 +1,31 @@
 package com.bolsadeideas.springboot.web.app.controllers;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.bolsadeideas.springboot.web.app.models.Usuario;
 
 @Controller
 @RequestMapping("/app")
 public class IndexController {
+	@Value("${pepe.paquito.peresoso.poca}")
+	private String textoIndex;
 	
-	@GetMapping({"index","/home","/"})
+	@Value("${texto.indexcontroller.perfil.titulo}")
+	private String textoPerfil;
+	
+	@Value("${texto.indexcontroller.listar.titulo}")
+	private String textoListar;
+	
+	@GetMapping({"/index","/home","/"})
 	public String index(ModelMap model) {
-		model.addAttribute("titulo", "hola string framework");
+		model.addAttribute("titulo", textoIndex);
 		return "index";
 	}
 	/*
@@ -30,7 +36,7 @@ public class IndexController {
 	*/
 	/*
 	public ModelAndView index(ModelAndView mv) {
-		mv.addObject("titulo", "hola string framework con modelandview");
+		mv.addObject("titulo", textoIndex);
 		mv.setViewName("index");
 		return mv;
 	}
@@ -44,7 +50,7 @@ public class IndexController {
 		usuario.setNombre("Victor");
 		usuario.setEmail("victorpenawow@gmail.com");
 		model.addAttribute("usuario", usuario);
-		model.addAttribute("titulo", "Perfil del usuario: ".concat(usuario.getNombre()));			
+		model.addAttribute("titulo", textoPerfil.concat(" " + usuario.getNombre()));			
 		
 		return "perfil";
 		
@@ -59,7 +65,7 @@ public class IndexController {
 		usuarios.add(new Usuario("Jane", "Pena", "jane@correo.com"));*/
 		
 		
-		model.addAttribute("titulo", "Listado Usuarios");
+		model.addAttribute("titulo", textoListar);
 		model.addAttribute("usuarios", usuarios);
 		
 		return "listar";		
