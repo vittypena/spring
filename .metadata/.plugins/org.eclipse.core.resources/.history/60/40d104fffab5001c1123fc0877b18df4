@@ -1,0 +1,30 @@
+package com.bolsadeideas.springboot.web.app.controllers;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class IndexController {
+	
+	@GetMapping({"index","/home","/"})
+	/*
+	public String index(ModelMap model) {
+		model.addAttribute("titulo", "hola string framework");
+		return "index";
+	}
+	*/
+	/*
+	public String index(Map<String, Object> model) {
+		model.put("titulo", "hola string framework");
+		return "index";
+	}
+	*/
+	public ModelAndView index(ModelAndView mv) {
+		mv.addObject("titulo", "hola string framework");
+		return mv;
+	}
+}
